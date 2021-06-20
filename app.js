@@ -75,7 +75,7 @@ galleryContainer.insertAdjacentHTML('beforeend', cardsMarkup);
 galleryContainer.addEventListener('click', onGalleryContainerClick);
 btnClose.addEventListener('click', modalClose);
 galleryOverlay.addEventListener('click', onOverlayClick);
-galleryOverlay.addEventListener('keypress', onEscPress);
+window.addEventListener('keypress', onEscPress);
 
 function createGalleryItems(items) {
   return galleryItems.map(({preview, original, description}) => {
@@ -113,15 +113,13 @@ function modalClose(evt) {
 };
 
 function onOverlayClick(evt) {
-  modalWindow.classList.remove('is-open');
-  modalImg.removeAttribute("src");
-  modalImg.removeAttribute("alt");
+if(evt.currentTarget === evt.target) {
+  modalClose();
+}
 };
 
 function onEscPress(evt) {
-  if(evt.key === "Escape" || evt.key === 'Esc' || evt.key === 27) {
-    modalWindow.classList.remove('is-open');
-    modalImg.removeAttribute("src");
-    modalImg.removeAttribute("alt");
+  if(evt.code === "Escape") {
+    modalClose();
 	}
 };
